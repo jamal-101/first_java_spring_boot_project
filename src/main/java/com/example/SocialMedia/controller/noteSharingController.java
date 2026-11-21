@@ -2,7 +2,6 @@ package com.example.SocialMedia.controller;
 
 import com.example.SocialMedia.entity.NoteSharing;
 import com.example.SocialMedia.service.NoteSharingService;
-//import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,13 +15,14 @@ public class noteSharingController {
     private NoteSharingService noteSharingService;
 
     @PostMapping("/create")
-    private  String create(@RequestBody NoteSharing noteSharing){
+    private String create(@RequestBody NoteSharing noteSharing) {
         noteSharingService.create(noteSharing);
-        return  "success";
+        return "success";
     }
+
     @GetMapping("/byId")
-    private  NoteSharing findById(@RequestParam long id){
-        NoteSharing note = noteSharingService.fidById(id);
+    private NoteSharing findById(@RequestParam long id) {
+        NoteSharing note = noteSharingService.findById(id);
         return note;
     }
 }
