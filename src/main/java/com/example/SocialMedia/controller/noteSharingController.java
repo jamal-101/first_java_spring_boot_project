@@ -1,13 +1,10 @@
 package com.example.SocialMedia.controller;
-
 import com.example.SocialMedia.entity.NoteSharing;
 import com.example.SocialMedia.service.NoteSharingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class noteSharingController {
@@ -25,4 +22,16 @@ public class noteSharingController {
         NoteSharing note = noteSharingService.findById(id);
         return note;
     }
+
+    @GetMapping("/getAll")
+    private List<NoteSharing> findAll(){
+        return noteSharingService.getEverything();
+    }
+
+    @DeleteMapping("/delete")
+    public  String delete(Long id){
+        noteSharingService.delete(id);
+        return  "delete successfully";
+    }
+
 }

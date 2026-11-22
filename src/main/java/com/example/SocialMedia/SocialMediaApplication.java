@@ -17,7 +17,6 @@ public class SocialMediaApplication {
 
 	@PostMapping("/old")
 	public String codi(@RequestParam int age) {
-		// বড় কন্ডিশনগুলো সবসময় উপরে রাখতে হবে
 		if (age > 100) {
 			return "You are a living legend";
 		} else if (age > 18) {
