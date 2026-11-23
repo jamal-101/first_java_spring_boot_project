@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class noteSharingController {
+@RequestMapping("NoteSharing")
+public class NoteSharingController {
     @Autowired
     private NoteSharingService noteSharingService;
 
@@ -26,7 +27,7 @@ public class noteSharingController {
     }
 
     @GetMapping("/getAll")
-    private List<NoteSharing> findAll(){
+    private List<NoteSharingResponse> findAll(){
         return noteSharingService.getEverything();
     }
 

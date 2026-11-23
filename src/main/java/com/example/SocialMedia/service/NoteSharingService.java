@@ -6,6 +6,7 @@ import com.example.SocialMedia.repository.NoteSharingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,11 +23,8 @@ public class NoteSharingService {
 
     public  NoteSharing convertToRequest(NoteSharingRequest noteSharingRequest){
         NoteSharing noteSharing = new NoteSharing();
-        noteSharing.setAuthor(noteSharingRequest.getAuthor());
         noteSharing.setTitle(noteSharingRequest.getTitle());
         noteSharing.setContact(noteSharingRequest.getContact());
-        noteSharing.setAuthorEmail(noteSharingRequest.getAuthorEmail());
-        noteSharing.setAuthorPassword(noteSharingRequest.getAuthorPassword());
 
         return noteSharing;
 
@@ -34,8 +32,6 @@ public class NoteSharingService {
 
     public NoteSharingResponse convertToResponse(NoteSharing noteSharing){
         NoteSharingResponse noteSharingResponse = new NoteSharingResponse();
-        noteSharingResponse.setAuthor(noteSharing.getAuthor());
-        noteSharingResponse.setAuthorEmail(noteSharing.getAuthorEmail());
         noteSharingResponse.setContact(noteSharing.getContact());
         noteSharingResponse.setTitle(noteSharing.getTitle());
         return  noteSharingResponse;
@@ -48,8 +44,16 @@ public class NoteSharingService {
         return  noteSharingResponse;
     }
 
-   public List<NoteSharing> getEverything(){
-        return  noteSharingRepository.findAll();
+   public List<NoteSharingResponse> getEverything(){
+        List<NoteSharing> noteSharing =   noteSharingRepository.findAll();
+        List<NoteSharingResponse> noteSharingResponses = new ArrayList<>();
+        for (NoteSharing note:noteSharing){
+            NoteSharingResponse noteSharingResponse = convertToResponse(note);
+            noteSharingResponses.add(noteSharingResponse);
+        }
+
+        return  noteSharingResponses;
+
    }
 
    public String delete(long id){

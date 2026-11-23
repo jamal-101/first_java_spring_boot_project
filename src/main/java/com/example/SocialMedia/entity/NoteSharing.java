@@ -14,7 +14,4 @@ public class NoteSharing {
     private  long id;
     private String title;
     private String contact;
-    private  String author;
-    private  String authorEmail;
-    private String authorPassword;
 }
