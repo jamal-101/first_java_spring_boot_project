@@ -1,9 +1,8 @@
 package com.example.SocialMedia.entity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 
 @Getter
@@ -18,4 +17,7 @@ public class Author {
     private  String author;
     private  String authorEmail;
     private String authorPassword;
+
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL, orphanRemoval = true)
+    List<NoteSharing> notes;
 }

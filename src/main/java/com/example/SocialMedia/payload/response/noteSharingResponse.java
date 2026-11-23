@@ -8,6 +8,7 @@ import lombok.*;
 public class NoteSharingResponse {
     private String title;
     private String contact;
+    private  Long id;
 //    private  String author;
 //    private  String authorEmail;
 //    private String authorPassword;

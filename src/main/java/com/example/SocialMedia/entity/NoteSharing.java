@@ -1,9 +1,7 @@
 package com.example.SocialMedia.entity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+import org.apache.catalina.User;
 
 @Entity
 
@@ -14,4 +12,11 @@ public class NoteSharing {
     private  long id;
     private String title;
     private String contact;
+
+
+    @ManyToOne
+    @JoinColumn(name =  "author_id")
+    private  Author author;
+
+
 }

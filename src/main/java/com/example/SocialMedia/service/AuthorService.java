@@ -38,6 +38,16 @@ public class AuthorService {
         AuthorResponse authorResponse = new AuthorResponse();
         authorResponse.setAuthor(author.getAuthor());
         authorResponse.setAuthorEmail(author.getAuthorEmail());
+
+        List<NoteSharingResponse> nr = new ArrayList<>();
+        for (NoteSharing note : author.getNotes()){
+            NoteSharingResponse noteSharing = new NoteSharingResponse();
+            noteSharing.setContact(note.getContact());
+            noteSharing.setTitle(note.getTitle());
+            noteSharing.setId(note.getId());
+            nr.add(noteSharing);
+        }
+        authorResponse.setNotes(nr);
         return  authorResponse;
 
     }

@@ -1,7 +1,9 @@
 package com.example.SocialMedia.service;
+import com.example.SocialMedia.entity.Author;
 import com.example.SocialMedia.entity.NoteSharing;
 import com.example.SocialMedia.payload.request.NoteSharingRequest;
 import com.example.SocialMedia.payload.request.NoteSharingResponse;
+import com.example.SocialMedia.repository.AuthorRepository;
 import com.example.SocialMedia.repository.NoteSharingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,16 +17,22 @@ public class NoteSharingService {
 
     @Autowired
     private NoteSharingRepository noteSharingRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
 
-    public NoteSharing create(NoteSharingRequest noteSharingRequest) {
+    public String  create(NoteSharingRequest noteSharingRequest) {
         NoteSharing noteSharing = convertToRequest(noteSharingRequest);
-        return noteSharingRepository.save(noteSharing);
+        Author author = authorRepository.findById(noteSharingRequest.getAuthorId()).get();
+        noteSharingRepository.save(noteSharing);
+        return "Note Sharing save successfully";
     }
 
     public  NoteSharing convertToRequest(NoteSharingRequest noteSharingRequest){
         NoteSharing noteSharing = new NoteSharing();
+        Author author = authorRepository.findById(noteSharingRequest.getAuthorId()).get();
         noteSharing.setTitle(noteSharingRequest.getTitle());
         noteSharing.setContact(noteSharingRequest.getContact());
+        noteSharing.setAuthor(author);
 
         return noteSharing;
 
