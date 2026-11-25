@@ -17,6 +17,7 @@ public class Author {
     private  String author;
     private  String authorEmail;
     private String authorPassword;
+    private String role;
 
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL, orphanRemoval = true)
     List<NoteSharing> notes;

@@ -9,6 +9,7 @@ import com.example.SocialMedia.repository.AuthorRepository;
 import com.example.SocialMedia.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ import java.util.List;
 public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public String create(AuthorRequestDto authorRequestDto) {
         Author author = convertToRequest(authorRequestDto);
@@ -28,7 +31,9 @@ public class AuthorService {
         Author author = new Author();
         author.setAuthor(authorRequestDto.getAuthor());
         author.setAuthorEmail(authorRequestDto.getAuthorEmail());
-        author.setAuthorPassword(authorRequestDto.getAuthorPassword());
+//        author.setAuthorPassword(authorRequestDto.getAuthorPassword());
+        author.setAuthorPassword(passwordEncoder.encode(authorRequestDto.getAuthorPassword()));
+        author.setRole("USER");
 
         return author;
 
@@ -38,6 +43,7 @@ public class AuthorService {
         AuthorResponse authorResponse = new AuthorResponse();
         authorResponse.setAuthor(author.getAuthor());
         authorResponse.setAuthorEmail(author.getAuthorEmail());
+
 
         List<NoteSharingResponse> nr = new ArrayList<>();
         for (NoteSharing note : author.getNotes()){
